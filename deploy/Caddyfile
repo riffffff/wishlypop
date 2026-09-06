@@ -1,0 +1,46 @@
+# ==============================================================
+# Wishly — Caddyfile (Reverse Proxy + Auto SSL/HTTPS)
+# Domain: wishlypop.com
+# Install Caddy: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
+# ==============================================================
+# 1. Simpan file ini sebagai /etc/caddy/Caddyfile
+# 2. Jalankan: sudo systemctl restart caddy
+# 3. Caddy otomatis request + renew SSL Let's Encrypt!
+# ==============================================================
+
+# --- Domain utama (HTTPS auto redirect dari HTTP) ---
+wishlypop.com {
+	# Keamanan header - hardening
+	header {
+		# HSTS force HTTPS 1 tahun
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+		# Unhide server info
+		-Server
+	}
+
+	# Compress response (lebih cepat diakses user)
+	encode zstd gzip
+
+	# Reverse proxy ke Wishly Next.js (Docker compose expose port 3000)
+	reverse_proxy 127.0.0.1:3000 {
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+		header_up X-Forwarded-Host {host}
+
+		# Healthcheck upstream - kalau tidak ada response 200, coba ulang
+		health_uri /
+		health_interval 15s
+		health_timeout 5s
+	}
+}
+
+# --- Redirect www.wishlypop.com -> wishlypop.com (SEO friendly canonical) ---
+www.wishlypop.com {
+	redir https://wishlypop.com{uri} permanent
+}

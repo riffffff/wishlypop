@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Card {
+  id                  String   @id @default(uuid())
+  cardId              String   @unique // Nanoid/slug for public URL /c/[cardId]
+  templateId          String   // minimalist-warm, festive-joy, photo-memory
+  recipientName       String
+  senderName          String?
+  message             String
+  photoUrl            String?
+  styling             String   // JSON stringified CardStyling
+  isPaid              Boolean  @default(false)
+  customerEmail       String?
+  lemonSqueezyOrderId String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([cardId])
+  @@index([isPaid])
+}

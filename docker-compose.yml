@@ -1,0 +1,39 @@
+services:
+  wishly:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wishly-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - DATABASE_URL=file:/app/data/wishly.db
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-https://wishlypop.com}
+      - LEMON_SQUEEZY_API_KEY=${LEMON_SQUEEZY_API_KEY:-}
+      - LEMON_SQUEEZY_STORE_ID=${LEMON_SQUEEZY_STORE_ID:-}
+      - LEMON_SQUEEZY_VARIANT_ID=${LEMON_SQUEEZY_VARIANT_ID:-}
+      - LEMON_SQUEEZY_WEBHOOK_SECRET=${LEMON_SQUEEZY_WEBHOOK_SECRET:-}
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+    volumes:
+      - wishly_data:/app/data
+    networks:
+      - wishly_net
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  wishly_data:
+    driver: local
+
+networks:
+  wishly_net:
+    driver: bridge
