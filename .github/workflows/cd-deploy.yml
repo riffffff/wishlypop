@@ -72,8 +72,11 @@ jobs:
             --exclude='node_modules' \
             --exclude='.next' \
             --exclude='data' \
+            --exclude='public/uploads' \
             --exclude='*.db' \
             --exclude='*.db-journal' \
+            --exclude='*.db-wal' \
+            --exclude='*.db-shm' \
             --exclude='.env' \
             ./ \
             "$HOST:$DEPLOY_PATH/"
