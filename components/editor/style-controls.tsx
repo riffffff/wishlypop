@@ -25,7 +25,7 @@ export function StyleControls({ styling, availableColors, onChange }: StyleContr
       <div className="space-y-2">
         <label className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
           <Type className="w-4 h-4 text-amber-500" />
-          Pilihan Font Tipografi
+          Typography Font
         </label>
         <div className="grid grid-cols-3 gap-2">
           {FONT_OPTIONS.map((f) => {
@@ -53,7 +53,7 @@ export function StyleControls({ styling, availableColors, onChange }: StyleContr
       <div className="space-y-2">
         <label className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
           <Palette className="w-4 h-4 text-amber-500" />
-          Warna Aksen Tema
+          Theme Accent Color
         </label>
         <div className="flex items-center gap-3 flex-wrap">
           {availableColors.map((color) => {
@@ -69,7 +69,7 @@ export function StyleControls({ styling, availableColors, onChange }: StyleContr
                     : 'border-white hover:scale-105 shadow-xs'
                 }`}
                 style={{ backgroundColor: color }}
-                aria-label={`Warna ${color}`}
+                aria-label={`Color ${color}`}
               >
                 {isSelected && <div className="w-2 h-2 rounded-full bg-white shadow-xs" />}
               </button>
@@ -81,7 +81,7 @@ export function StyleControls({ styling, availableColors, onChange }: StyleContr
       {/* Text Alignment */}
       <div className="space-y-2">
         <label className="text-sm font-semibold text-slate-800">
-          Penataan Teks (Alignment)
+          Text Alignment
         </label>
         <div className="flex items-center gap-2">
           {(['left', 'center', 'right'] as const).map((align) => {

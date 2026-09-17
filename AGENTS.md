@@ -114,3 +114,4 @@ npm run lint
 7. **Tahap 7:** Bangun halaman kartu interaktif dinamis (`/c/[cardId]`) dengan reveal effect
 8. **Tahap 8:** Integrasi pengiriman email via Resend
 9. **Tahap 9:** Testing end-to-end (Lemon Squeezy test mode)
+

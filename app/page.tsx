@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import { CardRenderer } from '@/components/card/card-renderer';
 import { CardData } from '@/types/card';
+import { WishlyPopLogo } from '@/components/brand/wishlypop-logo';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wishlypop.com';
 
 export default function HomePage() {
   // Sample showcase card
@@ -37,24 +40,39 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] flex flex-col selection:bg-amber-100 selection:text-amber-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'WishlyPop',
+            url: siteUrl,
+            applicationCategory: 'LifestyleApplication',
+            operatingSystem: 'Web',
+            description: 'Create beautiful personalized birthday cards online with messages, photos, and an interactive envelope reveal.',
+            offers: {
+              '@type': 'Offer',
+              price: '4.00',
+              priceCurrency: 'USD',
+              availability: 'https://schema.org/InStock',
+            },
+          }),
+        }}
+      />
       
       {/* Navigation */}
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-amber-100/60 px-4 sm:px-8 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <span className="font-extrabold text-xl tracking-tight text-slate-900">
-              Wishly<span className="text-amber-500">.</span>
-            </span>
+          <Link href="/" className="group">
+            <WishlyPopLogo />
           </Link>
 
           <Link
             href="/create"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-amber-500/20 hover:shadow-lg transition-all"
           >
-            <span>Buat Kartu</span>
+            <span>Create a Card</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -75,15 +93,15 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
-              Bikin kartu ucapan personal dalam{' '}
+              Create a personal birthday card in{' '}
               <span className="bg-gradient-to-r from-amber-600 via-rose-500 to-amber-600 bg-clip-text text-transparent">
-                2 menit
+                2 minutes
               </span>
-              , tanpa bingung mau nulis apa.
+              , without wondering what to write.
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Kirim ucapan ulang tahun spesial berbentuk halaman web interaktif dengan animasi buka amplop & taburan konfeti. Jauh lebih berkesan dari chat biasa.
+              Send a special birthday wish as an interactive web page with an animated envelope reveal and celebratory confetti. More memorable than an ordinary message.
             </p>
 
             {/* CTAs */}
@@ -93,7 +111,7 @@ export default function HomePage() {
                 className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-amber-500 hover:from-amber-600 hover:to-rose-600 text-white font-extrabold text-base shadow-xl shadow-rose-500/25 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5"
               >
                 <Sparkles className="w-5 h-5" />
-                <span>Buat Kartu Sekarang</span>
+                <span>Create Your Card</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -102,15 +120,15 @@ export default function HomePage() {
             <div className="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-semibold text-slate-600">
               <div className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-emerald-500 stroke-[3]" />
-                <span>Tanpa perlu buat akun</span>
+                <span>No account required</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-emerald-500 stroke-[3]" />
-                <span>24+ Bank pesan siap pakai</span>
+                <span>24+ ready-made messages</span>
               </div>
               <div className="flex items-center gap-1.5 col-span-2 sm:col-span-1">
                 <Check className="w-4 h-4 text-emerald-500 stroke-[3]" />
-                <span>Animasi reveal interaktif</span>
+                <span>Interactive reveal animation</span>
               </div>
             </div>
           </div>
@@ -121,10 +139,10 @@ export default function HomePage() {
               {/* Floating Decorative Badges */}
               <div className="absolute -top-4 -left-4 z-20 px-3 py-1.5 rounded-2xl bg-white shadow-lg border border-amber-100 flex items-center gap-2 text-xs font-bold text-slate-800 animate-pulse">
                 <PartyPopper className="w-4 h-4 text-rose-500" />
-                <span>Animasi Amplop Unik</span>
+                <span>Unique Envelope Reveal</span>
               </div>
 
-              <div className="p-3 bg-white rounded-3xl shadow-2xl border border-amber-100/80 -rotate-1 hover:rotate-0 transition-transform duration-300">
+              <div className="landing-card-stage p-3 bg-white rounded-3xl shadow-2xl border border-amber-100/80 -rotate-1 hover:rotate-0 transition-transform duration-300">
                 <CardRenderer card={sampleCard} showWatermark={false} />
               </div>
             </div>
@@ -137,10 +155,10 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto space-y-12 text-center">
           <div className="space-y-3">
             <span className="text-xs uppercase font-extrabold tracking-widest text-amber-600">
-              Mudah & Cepat
+              Easy & Fast
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-              3 Langkah Sederhana Mengirim Kebahagiaan
+              3 Simple Steps to Send Happiness
             </h2>
           </div>
 
@@ -150,9 +168,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">
                 1
               </div>
-              <h3 className="text-lg font-bold text-slate-900">Pilih Desain & Template</h3>
+              <h3 className="text-lg font-bold text-slate-900">Choose a Design & Template</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Pilih dari kurasi desain estetis (Minimalist Warm, Festive Joy, atau Photo Memory) yang siap memukau penerima.
+                Choose from curated designs (Sunlit Bloom, Festive Joy, or Color Memory) ready to delight the recipient.
               </p>
             </div>
 
@@ -161,9 +179,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-black text-lg">
                 2
               </div>
-              <h3 className="text-lg font-bold text-slate-900">Personalisasi Pesan & Foto</h3>
+              <h3 className="text-lg font-bold text-slate-900">Personalize the Message & Photo</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Tulis nama, pilih pesan menyentuh dari bank pesan 24 varian, upload foto kenangan, serta sesuaikan font & warna aksen.
+                Add a name, choose a heartfelt message from 24 options, upload a memory, and customize the font and accent color.
               </p>
             </div>
 
@@ -172,9 +190,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">
                 3
               </div>
-              <h3 className="text-lg font-bold text-slate-900">Kirim Link Kartu Interaktif</h3>
+              <h3 className="text-lg font-bold text-slate-900">Send the Interactive Card Link</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Setelah aktivasi, kamu langsung dapat link unik privat untuk dibagikan via WhatsApp, Instagram DM, atau Email kapan saja.
+                After activation, you get a private link to share via WhatsApp, Instagram DM, or email whenever you like.
               </p>
             </div>
           </div>
@@ -184,22 +202,22 @@ export default function HomePage() {
               href="/create"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md transition-all"
             >
-              <span>Mulai Buat Kartu Sekarang</span>
+              <span>Start Creating Your Card</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Feature Comparison / Why Wishly */}
+      {/* Feature Comparison / Why WishlyPop */}
       <section className="py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <span className="text-xs uppercase font-extrabold tracking-widest text-rose-600">
-              Lebih Istimewa
+              More Meaningful
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-              Mengapa Wishly Lebih Disukai Dibanding Chat Biasa?
+              Why Choose WishlyPop Over an Ordinary Message?
             </h2>
           </div>
 
@@ -209,9 +227,9 @@ export default function HomePage() {
                 <BookOpen className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900">Tidak Perlu Bingung Merangkai Kata</h4>
+                <h4 className="text-base font-bold text-slate-900">Never Wonder What to Write</h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Tersedia 24 pesan kurasi mendalam untuk sahabat, pasangan, orang tua, hingga rekan kerja. Bebas diedit sesuai gayamu.
+                  Choose from 24 thoughtful messages for friends, partners, parents, and coworkers. Edit them to make them yours.
                 </p>
               </div>
             </div>
@@ -221,9 +239,9 @@ export default function HomePage() {
                 <Zap className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900">Pengalaman Amplop Interaktif</h4>
+                <h4 className="text-base font-bold text-slate-900">Interactive Envelope Experience</h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Bukan sekadar gambar JPG statis. Kartu dibuka seperti kado kejutan di browser smartphone dengan konfeti perayaan.
+                  Not just a static JPG. The card opens like a surprise gift in a mobile browser with celebratory confetti.
                 </p>
               </div>
             </div>
@@ -233,9 +251,9 @@ export default function HomePage() {
                 <Smile className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900">Cepat & Solutif untuk H-1</h4>
+                <h4 className="text-base font-bold text-slate-900">Perfect for Last-minute Gifting</h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Lupa ulang tahun teman sampai malam sebelumnya? Kartu siap dalam 2 menit tanpa perlu menunggu pengiriman kurir fisik.
+                  Forgot a friend&apos;s birthday until the night before? Your card is ready in 2 minutes, with no physical delivery wait.
                 </p>
               </div>
             </div>
@@ -245,9 +263,9 @@ export default function HomePage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900">Tanpa Berlangganan / Tanpa Akun</h4>
+                <h4 className="text-base font-bold text-slate-900">No Subscription / No Account</h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Cukup bayar satu kali flat per kartu. Tidak ada jebakan langganan bulanan atau keharusan membuat akun baru.
+                  Pay one flat price per card. No monthly subscription traps and no account creation required.
                 </p>
               </div>
             </div>
@@ -259,14 +277,14 @@ export default function HomePage() {
       <footer className="mt-auto border-t border-amber-100 bg-white py-8 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-slate-900">Wishly</span>
+            <span className="font-extrabold text-slate-900">WishlyPop</span>
             <span>&bull;</span>
             <span>Personalized Birthday Ecards</span>
           </div>
           <div className="flex items-center gap-1">
-            <span>Dibuat dengan</span>
+            <span>Made with</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
-            <span>untuk momen berharga orang tersayang</span>
+            <span>for life&apos;s meaningful moments</span>
           </div>
         </div>
       </footer>

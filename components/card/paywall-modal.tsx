@@ -24,33 +24,33 @@ const actionConfig: Record<PaywallActionType, {
 }> = {
   share: {
     icon: <Share2 className="w-6 h-6" />,
-    title: 'Siap Kirim Kejutan ke Mereka?',
-    description: 'Kirim kartu personal ini sebagai hadiah ulang tahun satu kali untuk orang spesial. Mereka akan dapat pengalaman buka amplop animasi yang tak terlupakan.',
-    ctaPrimary: 'Kirim Kartu Sekarang',
+    title: 'Ready to Send Them a Surprise?',
+    description: 'Send this personal card as a one-time birthday gift for someone special. They will enjoy an unforgettable animated envelope reveal.',
+    ctaPrimary: 'Send Card Now',
   },
   export: {
     icon: <Download className="w-6 h-6" />,
-    title: 'Unduh & Kirim Tanpa Watermark',
-    description: 'Simpan kartu hasil desainmu dalam kualitas jernih untuk sekali pengiriman ke penerima. Tanpa watermark, pesanmu jadi pusat perhatian.',
-    ctaPrimary: 'Buka Kunci & Unduh',
+    title: 'Download & Send Without a Watermark',
+    description: 'Save your card design in crisp quality for one-time delivery to the recipient. Without a watermark, your message takes center stage.',
+    ctaPrimary: 'Unlock & Download',
   },
   'copy-link': {
     icon: <Copy className="w-6 h-6" />,
-    title: 'Salin Link & Kirim ke Penerima',
-    description: 'Aktifkan link unik kartu ini, lalu kirim sekali saja ke orang tersayang. Mereka dapat membukanya kapan saja untuk melihat kejutanmu.',
-    ctaPrimary: 'Aktifkan & Salin Link',
+    title: 'Copy the Link & Send It',
+    description: "Activate this card's unique link, then send it to someone you love. They can open it anytime to see your surprise.",
+    ctaPrimary: 'Activate & Copy Link',
   },
   send: {
     icon: <ExternalLink className="w-6 h-6" />,
-    title: 'Kirim Kartu Personal ke Mereka',
-    description: 'Satu langkah lagi, dan hadiah ulang tahun paling personal ini sampai ke tangan mereka lewat link unik yang hanya untuk mereka.',
-    ctaPrimary: 'Kirim Sekarang',
+    title: 'Send a Personal Card to Them',
+    description: 'One more step and this personal birthday gift will reach them through a unique link made just for them.',
+    ctaPrimary: 'Send Now',
   },
   'preview-unlock': {
     icon: <Sparkles className="w-6 h-6" />,
-    title: 'Buka Kunci & Kirim Kartu Ini',
-    description: 'Kartu ini sudah siap membuat mereka tersenyum lebar. Lepaskan watermark-nya dan kirim sekali saja ke penerima hari ini.',
-    ctaPrimary: 'Buka Kunci & Kirim',
+    title: 'Unlock & Send This Card',
+    description: 'This card is ready to make them smile. Remove the watermark and send it to the recipient today.',
+    ctaPrimary: 'Unlock & Send',
   },
 };
 
@@ -97,7 +97,7 @@ export function PaywallModal({
                 </div>
                 <div>
                   <span className="text-[10px] uppercase font-black tracking-widest bg-white/20 px-2.5 py-0.5 rounded-full">
-                    Hampir Jadi!
+                    Almost There!
                   </span>
                   <h3 className="text-xl font-black mt-1 leading-tight">
                     {config.title}
@@ -123,12 +123,12 @@ export function PaywallModal({
               <div className="space-y-3 mb-5">
                 <div className="flex items-center justify-between px-1 mb-1">
                   <h4 className="text-[11px] uppercase font-black tracking-widest text-slate-400">
-                    Kamu dapatkan sekali kirim:
+                    Included with your purchase:
                   </h4>
                   <div className="flex items-center gap-2">
                     <span className="text-[11px] line-through text-slate-400 font-bold">$8</span>
                     <span className="text-[11px] px-2 py-0.5 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-black uppercase tracking-wide">
-                      Diskon 50%
+                      50% Off
                     </span>
                   </div>
                 </div>
@@ -137,25 +137,25 @@ export function PaywallModal({
                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
-                    <span><strong>Kartu Tanpa Watermark</strong> — siap dikirim ke penerima</span>
+                    <span><strong>Watermark-free Card</strong> — ready to send</span>
                   </li>
                   <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700">
                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
-                    <span><strong>1 Link Unik Eksklusif</strong> untuk orang spesialmu</span>
+                    <span><strong>1 Exclusive Personal Link</strong> for someone special</span>
                   </li>
                   <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700">
                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
-                    <span><strong>Animasi Buka Amplop</strong> dengan konfeti perayaan</span>
+                    <span><strong>Animated Envelope Reveal</strong> with celebratory confetti</span>
                   </li>
                   <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700">
                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                     </div>
-                    <span><strong>Link Masuk Email</strong> otomatis dalam hitungan detik</span>
+                    <span><strong>Automatic Email Delivery</strong> within seconds</span>
                   </li>
                 </ul>
               </div>
@@ -177,14 +177,14 @@ export function PaywallModal({
                   onClick={onClose}
                   className="w-full py-2.5 px-6 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs transition-colors cursor-pointer"
                 >
-                  Belum Sekarang, Lanjut Edit
+                  Not Yet, Keep Editing
                 </button>
               </div>
 
               <p className="text-[10px] text-slate-400 text-center mt-4">
                 <span className="inline-flex items-center gap-1.5">
                   <Emoji emoji="💳" size={14} />
-                  <span>Pembayaran aman via Lemon Squeezy • Sekali bayar untuk sekali kirim</span>
+                  <span>Secure payment via Lemon Squeezy • One payment, one delivery</span>
                 </span>
               </p>
             </div>

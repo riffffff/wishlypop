@@ -13,6 +13,48 @@ body {
   overflow-x: hidden;
 }
 
+/* Keeps the showcase card lively without affecting the editor preview. */
+.landing-card-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  animation: landing-card-motion 10s ease-in-out infinite;
+}
+
+.landing-card-stage:hover {
+  animation-play-state: paused;
+  transform: rotate(0deg) rotateY(-8deg) translateY(-8px) scale(1.015);
+}
+
+@keyframes landing-card-motion {
+  0%, 12%, 100% {
+    transform: rotate(-1deg) translateY(0) rotateY(0deg);
+  }
+  17% {
+    transform: rotate(-3deg) translateY(-5px) rotateY(-3deg);
+  }
+  22% {
+    transform: rotate(2deg) translateY(-2px) rotateY(3deg);
+  }
+  27% {
+    transform: rotate(-1deg) translateY(0) rotateY(0deg);
+  }
+  43% {
+    transform: rotate(-1deg) translateY(0) rotateY(0deg);
+  }
+  49% {
+    transform: rotate(-1deg) translateY(-4px) rotateY(180deg);
+  }
+  55% {
+    transform: rotate(-1deg) translateY(0) rotateY(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-card-stage {
+    animation: none;
+  }
+}
+
 .font-playfair {
   font-family: 'Playfair Display', Georgia, serif;
 }

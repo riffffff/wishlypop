@@ -94,13 +94,13 @@ export function EnvelopeCard({ card }: EnvelopeCardProps) {
               <div className="relative z-10 text-center">
                 <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-black/25 px-4 py-1.5 rounded-full backdrop-blur-xs group-hover:bg-black/40 transition-colors">
                   <MailOpen className="w-3.5 h-3.5" />
-                  Sentuh untuk membuka kartu ✨
+                  Tap to open your card ✨
                 </span>
               </div>
             </div>
 
             <p className="text-xs text-slate-400 mt-4 animate-bounce">
-              Ketuk amplop di atas untuk melihat ucapan spesialmu
+              Tap the envelope above to reveal your special message
             </p>
           </motion.div>
         ) : (
@@ -135,7 +135,7 @@ export function EnvelopeCard({ card }: EnvelopeCardProps) {
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                 <span className="inline-flex items-center gap-1">
-                  <span>Rayakan Lagi</span>
+                  <span>Celebrate Again</span>
                   <Emoji emoji="🎊" size={16} />
                 </span>
               </button>
@@ -146,20 +146,20 @@ export function EnvelopeCard({ card }: EnvelopeCardProps) {
                 className="px-3.5 py-2 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
-                <span>Tutup Amplop</span>
+                <span>Close Envelope</span>
               </button>
             </div>
 
             {/* Subtle viral loop footer */}
             <div className="pt-6 border-t border-slate-200/60 w-full text-center space-y-2">
               <p className="text-xs text-slate-500">
-                Tersentuh dengan kartu ini? Buat kartu ulang tahun untuk orang terdekatmu dalam 2 menit.
+                Loved this card? Create a birthday card for someone special in 2 minutes.
               </p>
               <Link
                 href="/create"
                 className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 hover:text-amber-700 hover:underline"
               >
-                <span>Buat Kartu di Wishly &rarr;</span>
+                <span>Create a Card with Wishly &rarr;</span>
               </Link>
             </div>
           </motion.div>

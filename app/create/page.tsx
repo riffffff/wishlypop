@@ -11,14 +11,11 @@ import { PhotoUploader } from '@/components/editor/photo-uploader';
 import { PaywallModal } from '@/components/card/paywall-modal';
 import { CARD_TEMPLATES } from '@/lib/templates';
 import { CardData, TemplateId, CardStyling } from '@/types/card';
+import { WishlyPopLogo } from '@/components/brand/wishlypop-logo';
 import { 
   ArrowLeft, 
   Sparkles, 
   BookOpen, 
-  Layers, 
-  Type, 
-  Image as ImageIcon, 
-  Palette, 
   ArrowRight,
   Eye,
   Loader2,
@@ -43,7 +40,6 @@ export default function CreateCardPage() {
   const [styling, setStyling] = useState<CardStyling>(activeTemplate.defaultStyling);
 
   // UI state
-  const [activeTab, setActiveTab] = useState<'content' | 'template' | 'style' | 'photo'>('content');
   const [isMessageBankOpen, setIsMessageBankOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [cardId, setCardId] = useState<string | null>(null);
@@ -76,11 +72,11 @@ export default function CreateCardPage() {
   // Save draft and proceed to preview
   const handleProceedToPreview = async () => {
     if (!recipientName.trim()) {
-      alert('Silakan masukkan nama penerima kartu.');
+      alert('Please enter the recipient name.');
       return;
     }
     if (!message.trim()) {
-      alert('Silakan tulis atau pilih pesan ucapan.');
+      alert('Please write or choose a birthday message.');
       return;
     }
 
@@ -102,14 +98,14 @@ export default function CreateCardPage() {
 
       const data = await res.json();
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Gagal menyimpan kartu.');
+        throw new Error(data.error || 'Failed to save the card.');
       }
 
       setCardId(data.cardId);
       router.push(`/preview?id=${data.cardId}`);
     } catch (err) {
       console.error(err);
-      alert('Terjadi kesalahan saat menyiapkan preview. Silakan coba lagi.');
+      alert('Something went wrong while preparing the preview. Please try again.');
       setIsSaving(false);
     }
   };
@@ -127,13 +123,14 @@ export default function CreateCardPage() {
           <Link
             href="/"
             className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-amber-50 transition-colors"
-            title="Kembali ke Beranda"
+            title="Back to Home"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
+            <WishlyPopLogo compact />
             <h1 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-              <span>Editor Kartu Ulang Tahun</span>
+              <span>Birthday Card Editor</span>
               <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
                 Live Edit
               </span>
@@ -150,12 +147,12 @@ export default function CreateCardPage() {
           {isSaving ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Menyiapkan...</span>
+              <span>Preparing...</span>
             </>
           ) : (
             <>
               <Eye className="w-4 h-4" />
-              <span>Preview Kartu</span>
+              <span>Preview Card</span>
               <ArrowRight className="w-4 h-4 hidden sm:inline" />
             </>
           )}
@@ -165,76 +162,20 @@ export default function CreateCardPage() {
       {/* Main Workspace Layout */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Panel: Controls & Tabs (lg:col-span-7) */}
+        {/* Left Panel: All editor controls (lg:col-span-7) */}
         <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-          {/* Segmented Control Tabs */}
-          <div className="flex items-center p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60 overflow-x-auto no-scrollbar">
-            <button
-              type="button"
-              onClick={() => setActiveTab('content')}
-              className={`flex-1 min-w-[90px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                activeTab === 'content'
-                  ? 'bg-white text-amber-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <Type className="w-4 h-4" />
-              <span>Pesan</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('template')}
-              className={`flex-1 min-w-[90px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                activeTab === 'template'
-                  ? 'bg-white text-amber-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <Layers className="w-4 h-4" />
-              <span>Template</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('photo')}
-              className={`flex-1 min-w-[90px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                activeTab === 'photo'
-                  ? 'bg-white text-amber-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <ImageIcon className="w-4 h-4" />
-              <span>Foto</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('style')}
-              className={`flex-1 min-w-[90px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                activeTab === 'style'
-                  ? 'bg-white text-amber-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <Palette className="w-4 h-4" />
-              <span>Gaya</span>
-            </button>
-          </div>
-
-          {/* Tab 1: Content (Nama & Pesan) */}
-          {activeTab === 'content' && (
-            <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm space-y-5 animate-in fade-in duration-150">
+          {/* Message */}
+          <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm space-y-5">
               <div className="space-y-1.5">
                 <label className="text-sm font-semibold text-slate-800 flex items-center justify-between">
-                  <span>Nama Penerima *</span>
-                  <span className="text-xs text-slate-400 font-normal">Contoh: Sarah, Mom, Dave</span>
+                  <span>Recipient Name *</span>
+                  <span className="text-xs text-slate-400 font-normal">Example: Sarah, Mom, Dave</span>
                 </label>
                 <input
                   type="text"
                   value={recipientName}
                   onChange={(e) => setRecipientName(e.target.value)}
-                  placeholder="Masukkan nama yang berulang tahun..."
+                  placeholder="Enter the birthday person's name..."
                   maxLength={40}
                   className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-slate-800 text-sm outline-hidden transition-all font-medium"
                 />
@@ -243,7 +184,7 @@ export default function CreateCardPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-semibold text-slate-800">
-                    Pesan Ucapan *
+                    Birthday Message *
                   </label>
                   <button
                     type="button"
@@ -251,77 +192,70 @@ export default function CreateCardPage() {
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-xl transition-colors cursor-pointer"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Pilih dari Bank Pesan</span>
+                    <span>Choose from Message Bank</span>
                   </button>
                 </div>
                 <textarea
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tulis ucapan ulang tahun spesial di sini..."
+                  placeholder="Write a special birthday message here..."
                   maxLength={300}
                   className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-slate-800 text-sm outline-hidden transition-all leading-relaxed"
                 />
                 <div className="flex justify-between text-[11px] text-slate-400">
-                  <span>Pilih dari 24 inspirasi pesan siap pakai jika bingung menulis.</span>
+                  <span>Choose from 24 ready-to-use messages if you need inspiration.</span>
                   <span>{message.length}/300</span>
                 </div>
               </div>
 
               <div className="space-y-1.5 pt-1">
                 <label className="text-sm font-semibold text-slate-800 flex items-center justify-between">
-                  <span>Nama Pengirim (Opsional)</span>
-                  <span className="text-xs text-slate-400 font-normal">Contoh: Alex, Your Bestie</span>
+                  <span>Sender Name (Optional)</span>
+                  <span className="text-xs text-slate-400 font-normal">Example: Alex, Your Bestie</span>
                 </label>
                 <input
                   type="text"
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
-                  placeholder="Dari siapa kartu ini? (opsional)"
+                  placeholder="Who is this card from? (optional)"
                   maxLength={40}
                   className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-slate-800 text-sm outline-hidden transition-all"
                 />
               </div>
-            </div>
-          )}
+          </div>
 
-          {/* Tab 2: Template Selection */}
-          {activeTab === 'template' && (
-            <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm animate-in fade-in duration-150">
-              <TemplateSelector
-                selectedId={templateId}
-                onSelect={handleTemplateChange}
-              />
-            </div>
-          )}
+          {/* Template */}
+          <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm">
+            <TemplateSelector
+              selectedId={templateId}
+              onSelect={handleTemplateChange}
+            />
+          </div>
 
-          {/* Tab 3: Photo Upload */}
-          {activeTab === 'photo' && (
-            <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm animate-in fade-in duration-150">
-              <PhotoUploader
-                photoUrl={photoUrl}
-                onPhotoChange={(url) => setPhotoUrl(url)}
-              />
-            </div>
-          )}
+          {/* Photo */}
+          <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm">
+            <PhotoUploader
+              photoUrl={photoUrl}
+              onPhotoChange={(url) => setPhotoUrl(url)}
+            />
+          </div>
 
-          {/* Tab 4: Styling */}
-          {activeTab === 'style' && (
-            <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm animate-in fade-in duration-150">
-              <StyleControls
-                styling={styling}
-                availableColors={activeTemplate.colorPalette}
-                onChange={(newStyling) => setStyling(newStyling)}
-              />
-            </div>
-          )}
+          {/* Style */}
+          <div className="bg-white rounded-3xl p-6 border border-amber-100/80 shadow-sm">
+            <StyleControls
+              styling={styling}
+              availableColors={activeTemplate.colorPalette}
+              onChange={(newStyling) => setStyling(newStyling)}
+            />
+          </div>
 
           {/* Bottom Action Card */}
           <div className="p-4 rounded-3xl bg-gradient-to-r from-amber-50 to-rose-50 border border-amber-200/60 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div>
               <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-amber-500" />
-                Desain Selesai?
+                Ready to send?
               </h4>
             </div>
             <button
@@ -333,11 +267,11 @@ export default function CreateCardPage() {
               {isSaving ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Menyiapkan...</span>
+                  <span>Preparing...</span>
                 </>
               ) : (
                 <>
-                  <span>Lihat Preview Kartu</span>
+                  <span>View Card Preview</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -349,7 +283,7 @@ export default function CreateCardPage() {
         <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-24 space-y-3">
           <div className="text-center mb-1">
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">
-              Live Preview Real-time
+              Live Preview
             </span>
           </div>
 
@@ -371,7 +305,7 @@ export default function CreateCardPage() {
               className="py-2.5 px-2 rounded-2xl bg-white border border-slate-200 hover:bg-amber-50 hover:border-amber-200 text-slate-600 hover:text-amber-700 font-bold text-[11px] flex flex-col items-center gap-1 transition-all shadow-xs hover:shadow-sm cursor-pointer"
             >
               <Copy className="w-4 h-4" />
-              <span>Salin Link</span>
+              <span>Copy Link</span>
             </button>
             <button
               type="button"
@@ -379,7 +313,7 @@ export default function CreateCardPage() {
               className="py-2.5 px-2 rounded-2xl bg-white border border-slate-200 hover:bg-amber-50 hover:border-amber-200 text-slate-600 hover:text-amber-700 font-bold text-[11px] flex flex-col items-center gap-1 transition-all shadow-xs hover:shadow-sm cursor-pointer"
             >
               <Share2 className="w-4 h-4" />
-              <span>Bagikan</span>
+              <span>Share</span>
             </button>
             <button
               type="button"
@@ -387,7 +321,7 @@ export default function CreateCardPage() {
               className="py-2.5 px-2 rounded-2xl bg-white border border-slate-200 hover:bg-amber-50 hover:border-amber-200 text-slate-600 hover:text-amber-700 font-bold text-[11px] flex flex-col items-center gap-1 transition-all shadow-xs hover:shadow-sm cursor-pointer"
             >
               <Download className="w-4 h-4" />
-              <span>Unduh</span>
+              <span>Download</span>
             </button>
           </div>
         </div>

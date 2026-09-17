@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { prisma, formatCardRecord } from '@/lib/db';
 import { EnvelopeCard } from '@/components/interactive/envelope-card';
+import { WishlyPopLogo } from '@/components/brand/wishlypop-logo';
 import { Lock, ArrowRight, Sparkles } from 'lucide-react';
 
 interface PageProps {
@@ -16,13 +17,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!record) {
     return {
-      title: 'Birthday Card | Wishly',
-      description: 'A personalized birthday card crafted on Wishly.'
+      title: 'Birthday Card | WishlyPop',
+      description: 'A personalized birthday card crafted on WishlyPop.'
     };
   }
 
   return {
-    title: `Happy Birthday, ${record.recipientName}! 🎂 | Wishly`,
+    title: `Happy Birthday, ${record.recipientName}! 🎂 | WishlyPop`,
     description: `Someone special made a personalized birthday card for ${record.recipientName}. Open to reveal!`,
     openGraph: {
       title: `Happy Birthday, ${record.recipientName}! 🎂`,
@@ -45,15 +46,15 @@ export default async function PublicCardPage({ params }: PageProps) {
         <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mb-4">
           <Sparkles className="w-6 h-6" />
         </div>
-        <h1 className="text-xl font-bold text-slate-900">Kartu Tidak Ditemukan</h1>
+        <h1 className="text-xl font-bold text-slate-900">Card Not Found</h1>
         <p className="text-sm text-slate-500 max-w-sm mt-1">
-          URL kartu ini tidak valid atau telah dihapus.
+          This card URL is invalid or the card has been deleted.
         </p>
         <Link
           href="/"
           className="mt-6 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow transition-colors"
         >
-          Ke Halaman Utama
+          Go to Home
         </Link>
       </div>
     );
@@ -67,27 +68,27 @@ export default async function PublicCardPage({ params }: PageProps) {
           <Lock className="w-8 h-8" />
         </div>
         <span className="text-xs uppercase font-extrabold tracking-widest text-amber-600">
-          Akses Terbatas
+          Limited Access
         </span>
         <h1 className="text-2xl font-black text-slate-900 mt-1">
-          Kartu Ini Belum Diaktifkan
+          This Card Is Not Active Yet
         </h1>
         <p className="text-sm text-slate-600 max-w-md mt-2">
-          Kartu untuk <strong>{record.recipientName}</strong> saat ini masih dalam mode draft/belum dibayar. Selesaikan pembayaran untuk membuka kartu interaktif ini.
+          The card for <strong>{record.recipientName}</strong> is still a draft and has not been paid for. Complete payment to unlock this interactive card.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <Link
             href={`/preview?id=${record.cardId}`}
             className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md transition-colors inline-flex items-center justify-center gap-2"
           >
-            <span>Buka Halaman Pembayaran</span>
+            <span>Open Payment Page</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="/create"
             className="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-colors"
           >
-            Buat Kartu Baru
+            Create a New Card
           </Link>
         </div>
       </div>
@@ -105,8 +106,7 @@ export default async function PublicCardPage({ params }: PageProps) {
           href="/" 
           className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-amber-600 transition-colors"
         >
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-          <span>Wishly</span>
+          <WishlyPopLogo compact />
         </Link>
       </header>
 
@@ -117,7 +117,7 @@ export default async function PublicCardPage({ params }: PageProps) {
 
       {/* Subtle footer */}
       <footer className="p-4 text-center text-[11px] text-slate-400">
-        Wishly &copy; {new Date().getFullYear()} &bull; Personalized Digital Ecards
+        WishlyPop &copy; {new Date().getFullYear()} &bull; Personalized Digital Ecards
       </footer>
     </div>
   );

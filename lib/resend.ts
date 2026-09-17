@@ -20,7 +20,10 @@ export async function sendCardDeliveryEmail({
     return { success: true, simulated: true };
   }
 
+  const senderEmail = process.env.RESEND_FROM_EMAIL || 'Wishly <cards@wishlypop.com>';
+
   try {
+    console.log(`[Resend] Sending card delivery email to: ${toEmail} from: ${senderEmail}`);
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -28,7 +31,7 @@ export async function sendCardDeliveryEmail({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Wishly Cards <onboarding@resend.dev>',
+        from: senderEmail,
         to: [toEmail],
         subject: `Your Birthday Card for ${recipientName} is Ready! 🎂`,
         html: `
@@ -65,14 +68,15 @@ export async function sendCardDeliveryEmail({
 
     if (!res.ok) {
       const err = await res.json();
-      console.error('Resend email error:', err);
+      console.error('[Resend Error] Failed to send email:', JSON.stringify(err));
       return { success: false, error: err };
     }
 
     const data = await res.json();
+    console.log(`[Resend Success] Email delivered successfully to ${toEmail}, Resend ID: ${data.id}`);
     return { success: true, id: data.id };
   } catch (error) {
-    console.error('Failed to send email via Resend:', error);
+    console.error('[Resend Exception] Failed to send email via Resend:', error);
     return { success: false, error };
   }
 }

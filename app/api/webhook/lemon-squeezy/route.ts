@@ -63,11 +63,15 @@ export async function POST(req: NextRequest) {
 
       const targetEmail = customerEmail || existingCard.customerEmail;
       if (targetEmail) {
-        await sendCardDeliveryEmail({
+        console.log(`[Webhook] Sending card delivery email to: ${targetEmail} for card: ${cardId}`);
+        const emailResult = await sendCardDeliveryEmail({
           toEmail: targetEmail,
           recipientName: existingCard.recipientName,
           cardUrl
         });
+        console.log(`[Webhook] Email delivery result for ${cardId}:`, emailResult);
+      } else {
+        console.warn(`[Webhook] Warning: No target email available for card ${cardId}`);
       }
 
       return NextResponse.json({ success: true, cardId, status: 'paid' }, { status: 200 });

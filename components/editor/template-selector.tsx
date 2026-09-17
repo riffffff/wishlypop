@@ -16,9 +16,9 @@ export function TemplateSelector({ selectedId, onSelect }: TemplateSelectorProps
       <div className="flex items-center justify-between">
         <label className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
           <Sparkles className="w-4 h-4 text-amber-500" />
-          Pilih Template Desain
+          Choose a Design Template
         </label>
-        <span className="text-xs text-slate-500">3 Pilihan Desain</span>
+        <span className="text-xs text-slate-500">3 design options</span>
       </div>
 
       <div className="grid grid-cols-3 gap-2.5 sm:gap-3">

@@ -33,15 +33,15 @@ export function MessageBankModal({ isOpen, onClose, onSelectMessage }: MessageBa
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-900">Bank Pesan Ucapan</h3>
-              <p className="text-xs text-slate-500">Pilih inspirasi pesan personal tanpa bingung menulis</p>
+              <h3 className="text-lg font-bold text-slate-900">Birthday Message Bank</h3>
+              <p className="text-xs text-slate-500">Find personal message inspiration without writer&apos;s block</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-            aria-label="Tutup"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
@@ -100,7 +100,7 @@ export function MessageBankModal({ isOpen, onClose, onSelectMessage }: MessageBa
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-white transition-colors cursor-pointer shadow-xs"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  Gunakan Pesan Ini
+                  Use This Message
                 </button>
               </div>
             </div>
@@ -109,13 +109,13 @@ export function MessageBankModal({ isOpen, onClose, onSelectMessage }: MessageBa
 
         {/* Footer */}
         <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-xs text-slate-500">
-          <span>* Anda tetap dapat mengedit kata-kata setelah memilih</span>
+          <span>* You can still edit the wording after selecting a message</span>
           <button
             type="button"
             onClick={onClose}
             className="px-4 py-2 rounded-xl font-medium text-slate-600 hover:bg-slate-200 transition-colors"
           >
-            Batal
+            Cancel
           </button>
         </div>
       </div>
